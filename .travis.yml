@@ -1,0 +1,14 @@
+sudo: true
+dist: trusty
+jobs:
+  include:
+  - stage: build docker image
+    if: branch = master
+    script:
+    - docker build -t $DOCKER_USERNAME/docker-redis .
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_USERNAME/docker-redis
+env:
+  global:
+  - secure: ZijhQYJKNMmx9+ZFED/slGMupxINb3yxbyZi4SaSCS4xYVQQ8lOshhFgFpFsMPZGMZAsjdSWIFh1U1vSQK2dg1SWH5UotJSaKBn6UKvTIJnaGNzShZC0YOhxiM3X7yug/g2LIlA6ItI0Yt6ddYesYcyONYNwrd6sSm3Ct6Vgm3bqMKNYkQ7ORZ+FUIUrt/q6AxZhPWqwHJc9KG++3YVkeh3ZU2+1CTV+2SyrdBMTkuheqxnk0o4/5nYiO+aec7uIMbjPNnraAl/rF+BEsGAzf+kJfOVeiKiyQJ3ZdQkdYACGPlz6Gjh9i6ywmUoqpCYjwqFjOnuMhTJj35b/GAsJWorlHZGSpgrvRlBQUxaI+GvyCIzFTNmzHBcfsuPvYGNMTy0frZMbsYzTU80bLckwRzKtctzzmAnQ1G3G7BocGEp/KE4cR5jvSmW/Cba9pQZegI4WGxkfdd/aI7ePRuzSxc4hFGAYufnWB8SrWtIqIFA38ecpgKlBBFaFuuRr+4SUx5Y6aLtKvu+l8OqoeEi6hRBhGnMStQD1XfMH+FCPVv2mzgiu6uAbrIDH7UJQpBHH7Q1HJsiTirYdFJ1nv5RosVCywc43kgxoQfO5gUNOWQgchAPbzyfWZPQneQnvwznZssvwnjNtLD3zDAROEmkDNdutyc2xY2K+WpZM4w5ZSWc=
+  - secure: KLUKbFZr/8E7S/G0ueoFSdbO2JOIVYQBiNNuLHR6m9LVgv4Qbo0nr3r1BWG2lbHtZkysviXh0YZs+M7KG+dKew7KTTh62t43eSWQlB/DyY8jDxZkGwhy6EhNkFDqtd0PcnXCulY7gpX2YlN3aWIDJ7yyC7QdEu7ZqmqCIDRHOeOHvqkH96FNIbWG4KXD08JiLd7VMeKhnwAE9II+FckBA8m3ojGlDMHDOU8MMVNf9WsMfZfIZyXYZ13JN5jF7xNCuLBz9FgOZ2aSHYZEFk0KjRSPk0VYERvq63F3hZIx9Y4IVDxI8qTSihUddwxEDaRiJCa20tymPavzZVSU2T/zRB6ioUZbpqg3leMRow7e5mz82mmawrgWxWhNIyznlr8LhB6D+UcbibirSw9XuyW/ydVUN/U0LUvL/xYzfSBjsY6vFdRVZ1tCtToUisG1QZuOMMBUdC5x4OS3g7EaIkhJwY3hTi+sJKhGws6huWaqGeXzM+QDa6tTqaiaN1/4F7sDdxqOK7K5hCZOwdEQNaTSqQH9aasgooTVJqd8u++VQllfFfG3JFQalw/+03bSsx/tdRBhf8Gvgi2iZa91uirUO25BDUjr4bNv8wUtuKp+vlgqkHXx8knyAxspb4EESgFe6rxXSaOzfN4p+9xmugxxvVsr0yb6oJ11KJXhnH7C35I=
